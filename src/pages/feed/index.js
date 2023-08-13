@@ -32,34 +32,28 @@ export const FeedPage = () => {
       });
   };
 
-  const onClickCard = (navigator, id) => {
-    goToRecipeDetailPage(navigator,id)
-  }
 
-  const onClickAddButton = () => {
-    goToRecipe(navigate)
-  }
+const onClickCard = (navigator, id) => {
+  goToRecipeDetailPage(navigator,id)
+}
 
-  const removeCard = (idToRemove) => {
-    setRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe.id !== idToRemove));
-  }
-
+const onClickAddButton = () => {
+  goToRecipe(navigate)
+}
   return (
     <FeedContainerStyled>
-      {recipes.map((recipe, i) => (
-        <RecipeCardStyled  key={i} isVisible={!!recipe.imageUrl}>
-          <RecipeImage
-            onClick={() => onClickCard(navigate, recipe.id)}
-            src={recipe.imageUrl}
-            alt="Foto receita"
-            onError={() => removeCard(recipe.id)}
-          />
-          <RecipeTitle>{recipe.title}</RecipeTitle>
-        </RecipeCardStyled>
+      {recipes.map((recipe, i) => ( 
+          <RecipeCardStyled onClick={() => onClickCard(navigate, recipe.id)} key={i} isVisible={!!recipe.imageUrl}>
+            <RecipeImage
+              src={recipe.imageUrl}
+              alt="Foto receita"
+            />
+            
+            <RecipeTitle>{recipe.title}</RecipeTitle>
+          </RecipeCardStyled>
       ))}
       <Button onClick={() => onClickAddButton()} variant="add-recipe">+</Button>
     </FeedContainerStyled>
   );
 };
-
 
